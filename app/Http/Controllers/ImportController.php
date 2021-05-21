@@ -56,10 +56,11 @@ class ImportController extends Controller
         $csv_data = json_decode($data->csv_data, true);
         foreach ($csv_data as $row) {
             $contact = new Product();
-            foreach (config('app.db_fields') as $index => $field) {
+            // dd($contact->fillable);
+            foreach ($contact->fillable as $index => $field) {
                 if ($data->csv_header) {
                     $contact->$field = $row[$request->fields[$field]];
-                    $row['url'] = substr($row['url'], 0, strpos($row['url'], '?'));
+                    $row['url'] = substr($row['url'],  strpos($row['url'], '?'));
                     $row['created_at'] = Carbon::now(); 
                     if($row['description'] == ""){
                         $contact->$field = $row[$request->fields[$field]]."";

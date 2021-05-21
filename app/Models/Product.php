@@ -10,17 +10,9 @@ class Product extends Model
 
     public $fillable = [
         'id',
-        'publisher',
-        'type',
         'name',
         'price',
-        'product_url',
-        'content_id',
-        'date',
         'description',
-        'country',
-        'store_id',
-        'online',
         'brand',
         'variant',
         'url',

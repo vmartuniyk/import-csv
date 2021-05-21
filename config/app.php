@@ -228,18 +228,4 @@ return [
 
     ],
 
-    'db_fields' => [
-        'id',
-        'name',
-        'brand',
-        'price',
-        'description',
-        'variant',
-        'url',
-        'product_id',
-        'active',
-        'created_at'
-    ]
-
-
 ];
