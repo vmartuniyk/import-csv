@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
-use App\CsvData;
+use App\Models\Product;
+use App\Models\CsvData;
 use Carbon\Carbon;
 use App\Http\Requests\CsvImportRequest;
 use Illuminate\Http\Request;
@@ -61,7 +61,6 @@ class ImportController extends Controller
                     $contact->$field = $row[$request->fields[$field]];
                     $row['url'] = substr($row['url'], 0, strpos($row['url'], '?'));
                     $row['created_at'] = Carbon::now(); 
-                    //  dd($row);
                     if($row['description'] == ""){
                         $contact->$field = $row[$request->fields[$field]]."";
                     }
