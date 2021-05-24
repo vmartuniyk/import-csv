@@ -21,6 +21,7 @@ class ImportController extends Controller
     {
 
         $path = $request->file('csv_file')->getRealPath();
+        $products_header = new Product();
 
         if ($request->has('header')) {
             $data = Excel::load($path, function($reader) {})->get()->toArray();
@@ -35,7 +36,7 @@ class ImportController extends Controller
                     $csv_header_fields[] = $key;
                 }
             }
-            $csv_data = array_slice($data, 0, 2);
+            $csv_data = array_slice($data, 0);
 
             $csv_data_file = CsvData::create([
                 'csv_filename' => $request->file('csv_file')->getClientOriginalName(),
@@ -46,7 +47,7 @@ class ImportController extends Controller
             return redirect()->back();
         }
 
-        return view('import_fields', compact( 'csv_header_fields', 'csv_data', 'csv_data_file'));
+        return view('import_fields', compact( 'products_header', 'csv_data', 'csv_data_file'));
 
     }
 
@@ -56,7 +57,6 @@ class ImportController extends Controller
         $csv_data = json_decode($data->csv_data, true);
         foreach ($csv_data as $row) {
             $contact = new Product();
-            // dd($contact->fillable);
             foreach ($contact->fillable as $index => $field) {
                 if ($data->csv_header) {
                     $contact->$field = $row[$request->fields[$field]];

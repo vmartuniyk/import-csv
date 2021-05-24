@@ -29,7 +29,7 @@
                             @foreach ($csv_data[0] as $key => $value)
                                 <td>
                                     <select name="fields[{{ $key }}]">
-                                        @foreach (config('app.db_fields') as $db_field)
+                                        @foreach ($products_header->fillable  as $db_field)
                                             <option value="{{ (\Request::has('header')) ? $db_field : $loop->index }}"
                                                 @if ($key === $db_field) selected @endif>{{ $db_field }}</option>
                                         @endforeach
